@@ -15,6 +15,41 @@ const Hero: React.FC<{ scrollY: number }> = ({ scrollY }) => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  // Helper to generate organic cell styles
+  const renderCells = () => {
+    const letters = [
+      // C formation
+      { x: '25%', y: '35%' }, { x: '20%', y: '45%' }, { x: '22%', y: '55%' }, { x: '28%', y: '65%' }, { x: '20%', y: '30%' },
+      // U formation
+      { x: '45%', y: '35%' }, { x: '45%', y: '50%' }, { x: '50%', y: '65%' }, { x: '55%', y: '50%' }, { x: '55%', y: '35%' },
+      // Z formation
+      { x: '70%', y: '35%' }, { x: '80%', y: '35%' }, { x: '75%', y: '50%' }, { x: '70%', y: '65%' }, { x: '80%', y: '65%' },
+    ];
+
+    return letters.map((pos, i) => {
+      const size = 15 + Math.random() * 20;
+      const delay = Math.random() * 5;
+      const duration = 4 + Math.random() * 4;
+      // Organic border radius for "squishy" look
+      const br = `${40 + Math.random() * 30}% ${30 + Math.random() * 40}% ${50 + Math.random() * 20}% ${40 + Math.random() * 30}%`;
+      
+      return (
+        <div
+          key={i}
+          className="absolute bg-cyan-400/20 backdrop-blur-[2px] border border-white/20 shadow-[0_0_15px_rgba(34,211,238,0.2)] transition-all duration-1000"
+          style={{
+            left: pos.x,
+            top: pos.y,
+            width: `${size}px`,
+            height: `${size}px`,
+            borderRadius: br,
+            animation: `wiggle ${duration}s ease-in-out ${delay}s infinite alternate`,
+          }}
+        />
+      );
+    });
+  };
+
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#010409]">
       {/* Background Ambience */}
@@ -22,6 +57,16 @@ const Hero: React.FC<{ scrollY: number }> = ({ scrollY }) => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-cyan-950/20 via-slate-950 to-fuchsia-950/10"></div>
         <div className="scanline"></div>
       </div>
+
+      <style>{`
+        @keyframes wiggle {
+          0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+          100% { transform: translate(15px, 10px) rotate(10deg) scale(1.1); }
+        }
+        .microscope-fluid {
+          background: radial-gradient(circle at center, rgba(34, 211, 238, 0.05) 0%, rgba(2, 6, 23, 0.4) 100%);
+        }
+      `}</style>
 
       {/* Floating 3D/AI Assets (Parallax Layers) */}
       <div 
@@ -43,14 +88,22 @@ const Hero: React.FC<{ scrollY: number }> = ({ scrollY }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 to-transparent"></div>
         </div>
 
-        {/* AI Construct 2 (The "CUZ" Sculpture) */}
+        {/* AI Construct 2 (The "Microscope Viewport" with CUZ cells) */}
         <div 
-          className="absolute top-[10%] left-[15%] w-64 h-64 lg:w-[28rem] lg:h-[28rem] glass rounded-full overflow-hidden border border-fuchsia-500/30 floating-asset"
+          className="absolute top-[10%] left-[15%] w-64 h-64 lg:w-[28rem] lg:h-[28rem] glass rounded-full overflow-hidden border border-fuchsia-500/30 floating-asset shadow-[inset_0_0_50px_rgba(217,70,239,0.1)]"
           style={{ transform: `translateY(${scrollY * 0.2}px)`, animationDelay: '0.5s' }}
         >
-          {/* Futuristic sculptural image representing the CUZ entity */}
-          <img src="https://images.unsplash.com/photo-1614850523296-e8c1d4832a27?auto=format&fit=crop&q=80&w=1200" className="w-full h-full object-cover opacity-40 brightness-110" alt="CUZ Abstract Sculpture" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-fuchsia-500/10 to-slate-950/60"></div>
+          {/* Microscope Fluid Background */}
+          <div className="absolute inset-0 microscope-fluid" />
+          
+          {/* Organic Floating Cells spelling CUZ */}
+          <div className="absolute inset-0">
+            {renderCells()}
+          </div>
+          
+          {/* Light aberrations/reflection */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-fuchsia-500/5 via-transparent to-cyan-400/5" />
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-white/5 blur-3xl -translate-y-1/2 transform -rotate-45" />
         </div>
 
         {/* Small UI Fragments */}
