@@ -1,8 +1,5 @@
 {
-  "name": "uMedia - AI Video Portfolio",
-  "description": "A dark, minimal portfolio platform for AI-generated media (un-media), featuring automatic hover playback and educational process descriptions.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
+  "name": "Cuz Media AS - AI-Mediebyrå",
+  "description": "Et hypermoderne AI-mediebyrå som produserer innhold med kunstig intelligens for å la de små slå de store.",
+  "requestFramePermissions": []
 }
