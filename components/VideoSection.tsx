@@ -18,7 +18,7 @@ const videos: VideoItem[] = [
     tags: ["#AI-video", "#Kampanje", "#Cinematisk"],
     id: "v1",
     thumbnail: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
-    videoSrc: "https://assets.mixkit.co/videos/preview/mixkit-abstract-landscape-of-mountains-in-red-and-blue-colors-31718-large.mp4"
+    videoSrc: "https://larscuzner.com/CuzStethoscope.mp4"
   },
   {
     title: "KI-klipp fra UB-prosjekt",
